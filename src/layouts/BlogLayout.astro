@@ -1,0 +1,42 @@
+---
+
+import Layout from './Layout.astro';
+import '@/pages/utils.css';
+
+const { frontmatter } = Astro.props;
+---
+<Layout title={frontmatter.title}>
+  <header>
+    <a href="/"><h2><span class="text-gradient">TikTok Trand Resacher</span></h2></a>
+    <a href="https://github.com/eviry-yikeda/markdown-blog" target="_blank" rel="noopener noreferrer"
+    ><img src="/github-mark-white.svg" alt="github" width="30px" height="30px"  /></a>
+  </header>
+  <main>
+    <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+    <h1>{frontmatter.title}</h1>
+    <div class="post-meta">
+        <p>投稿日: {frontmatter.pubDate}</p>
+    </div>
+    <div class="post-content">
+      <slot />
+    </div>
+  </main>
+</Layout>
+<style>
+  main {
+    margin: 6rem auto;
+  }
+  a {
+    text-decoration: none;
+  }
+  .post-meta {
+    display: flex;
+    justify-content: center;
+    font-size: 0.8rem;
+  }
+  .post-content {
+    background-color: #23262d;
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+</style>
