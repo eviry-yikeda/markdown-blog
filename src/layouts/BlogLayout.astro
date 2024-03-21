@@ -4,15 +4,20 @@ import Layout from './Layout.astro';
 import '@/pages/utils.css';
 
 const { frontmatter } = Astro.props;
+
+const BASE_URL = import.meta.env.BASE_URL;
+
+const pubImageURL = frontmatter?.image?.url ? `${BASE_URL}/${frontmatter.image.url}` : '';
+
 ---
 <Layout title={frontmatter.title}>
   <header>
-    <a href="/"><h2><span class="text-gradient">TikTok Trand Resacher</span></h2></a>
+    <a href={BASE_URL}><h2><span class="text-gradient">TikTok Trand Resacher</span></h2></a>
     <a href="https://github.com/eviry-yikeda/markdown-blog" target="_blank" rel="noopener noreferrer"
-    ><img src="/github-mark-white.svg" alt="github" width="30px" height="30px"  /></a>
+    ><img src=`${BASE_URL}/github-mark-white.svg` alt="github" width="30px" height="30px"  /></a>
   </header>
   <main>
-    <img src={frontmatter.image.url} alt={frontmatter.image.alt} />
+    <img src={pubImageURL} alt={frontmatter.image?.alt ?? ''} />
     <h1>{frontmatter.title}</h1>
     <div class="post-meta">
         <p>投稿日: {frontmatter.pubDate}</p>
