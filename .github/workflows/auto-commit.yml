@@ -11,21 +11,6 @@ permissions:
   pull-requests: write      # 'write' access to pull requests
 
 jobs:
-  # check-branch:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: 'check exist today branch'
-  #       run: |
-  #         git branch -a
-  #         echo "CURRENT_DATETIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
-  #         git branch -a | grep ${{ env.CURRENT_DATETIME }}_auto_commit
-  #         if [ $? -eq 0 ]; then
-  #           echo "branch exist"
-  #           exit 1
-  #         else
-  #           echo "branch not exist"
-  #         fi
 
   auto-commit:
     # needs: check-branch
@@ -56,11 +41,6 @@ jobs:
           git add .
           git commit -m "[add] 自動コミット:${{ env.CURRENT_DATETIME }}"
           git push origin ${{ env.CURRENT_DATETIME }}_auto_commit
-      # - name: GitHub Push
-      #   uses: ad-m/github-push-action@v0.8.0
-      #   with:
-      #     directory: "."
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 'Create Pull Request'
         env:
