@@ -1,5 +1,4 @@
 ---
-
 import Layout from './Layout.astro';
 import '@/pages/utils.css';
 
@@ -34,6 +33,9 @@ const pubImageURL = frontmatter?.image?.url ? `${BASE_URL}/${frontmatter.image.u
   a {
     text-decoration: none;
   }
+	img {
+			max-height: 200px;
+	}
   .post-meta {
     display: flex;
     justify-content: center;
