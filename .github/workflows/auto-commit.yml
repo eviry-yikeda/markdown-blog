@@ -57,20 +57,22 @@ jobs:
 
           # 生成したarticle_writer/articles内にあるmdファイル名を取得
           echo "MD_FILE_NAME=$(ls articles)" >> $GITHUB_ENV
+          echo ${{ env.MD_FILE_NAME }}
 
           # 生成したmdファイルをsrc/pages/blogに移動
-          mv articles/${{ env.MD_FILE_NAME }} ../src/pages/blog
+          echo "mv articles/${{ env.MD_FILE_NAME }} ../src/pages/blog/"
+          mv articles/${{ env.MD_FILE_NAME }} ../src/pages/blog/
 
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
           cd ../
           git add .
-          git commit -m "[add] 自動コミット:${{ env.CURRENT_DATETIME }}"
-          git push origin ${{ env.CURRENT_DATETIME }}_auto_commit
+          git commit -m "[add] 自動コミット:${{ env.CURRENT_DATETIME }}-${{ env.MD_FILE_NAME }}"
+          git push origin ${{ env.MD_FILE_NAME }}_auto_commit
 
       - name: 'Create Pull Request'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr create --title "自動コミット:${{ env.CURRENT_DATETIME }}" --body "自動コミット:${{ env.CURRENT_DATETIME }}" --base main --head ${{ env.CURRENT_DATETIME }}_auto_commit
+          gh pr create --title "自動コミット:${{ env.CURRENT_DATETIME }}-${{ env.MD_FILE_NAME }}" --body "自動コミット:${{ env.CURRENT_DATETIME }}-${{ env.MD_FILE_NAME }}" --base main --head ${{ env.MD_FILE_NAME }}_auto_commit
