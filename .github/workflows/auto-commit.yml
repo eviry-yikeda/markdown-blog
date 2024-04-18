@@ -44,8 +44,11 @@ jobs:
 
       - name: 'Run article_writer'
         working-directory: ./article_writer
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          BING_SUBSCRIPTION_KEY: ${{ secrets.BING_SUBSCRIPTION_KEY }}
+          BING_SEARCH_URL: ${{ secrets.BING_SEARCH_URL }}
         run: poetry run python main.py
-
       - name: 'Run process & Commit'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
