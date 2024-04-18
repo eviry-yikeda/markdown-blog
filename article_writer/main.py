@@ -69,8 +69,8 @@ def main():
             print(info)
             print("reviewer_tid", writer_agent.settings.thread_id)
             if FINISH_MESSAGE in info:
-                info = input("追加指示があれば入力してください：")
-                if not info:
+                # info = input("追加指示があれば入力してください：")
+                # if not info:
                     break
 
     export_article(article=article.replace(FINISH_MESSAGE, ""), topic=topic)
