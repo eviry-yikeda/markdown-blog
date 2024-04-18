@@ -48,20 +48,23 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           BING_SUBSCRIPTION_KEY: ${{ secrets.BING_SUBSCRIPTION_KEY }}
           BING_SEARCH_URL: ${{ secrets.BING_SEARCH_URL }}
-        run: poetry run python main.py
-      - name: 'Run process & Commit'
-        env:
+        # run: poetry run python main.py
+        # - name: 'Run process & Commit'
+        #   env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # 生成したmdファイル名を取得
-          echo "MD_FILE_NAME=$(ls -1t | head -n 1)" >> $GITHUB_ENV
+          poetry run python main.py
+
+          # 生成したarticle_writer/articles内にあるmdファイル名を取得
+          echo "MD_FILE_NAME=$(ls articles)" >> $GITHUB_ENV
 
           # 生成したmdファイルをsrc/pages/blogに移動
-          mv ${{ env.MD_FILE_NAME }} ./src/pages/blog
+          mv articles/${{ env.MD_FILE_NAME }} ../src/pages/blog
 
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
 
+          cd ../
           git add .
           git commit -m "[add] 自動コミット:${{ env.CURRENT_DATETIME }}"
           git push origin ${{ env.CURRENT_DATETIME }}_auto_commit
