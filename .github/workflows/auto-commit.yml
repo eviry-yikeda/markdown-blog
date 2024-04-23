@@ -28,7 +28,7 @@ jobs:
         env:
           TZ: 'Asia/Tokyo'
         run: |
-          echo "CURRENT_DATETIME=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+          echo "CURRENT_DATETIME=$(date '+%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV
 
       - name: 'checkout new branch'
         run: |
