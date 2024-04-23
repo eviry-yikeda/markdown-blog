@@ -3,8 +3,15 @@ import Layout from '@/layouts/Layout.astro';
 import Card from '@/components/Card.astro';
 
 
-const allPosts = await Astro.glob('@/pages/blog/*.md')
+const allPosts = await Astro.glob('@/pages/blog/*.md');
 import './utils.css';
+
+allPosts.sort((a, b) => {
+	const dateA = new Date(a.frontmatter.pubDate).getTime();
+	const dateB = new Date(b.frontmatter.pubDate).getTime();
+	return dateB - dateA;
+});
+
 ---
 
 <Layout title="Welcome to Astro.">
