@@ -77,5 +77,5 @@ def main(topic: str):
 if __name__ == "__main__":
     args = sys.argv
 
-    topic = args[1] if len(args) > 1 else "Youtubeにおける美容トレンドはなんですか？"
+    topic = args[1] if len(args) > 1 else "YoutubeとTikTokでの美容トレンドはなんですか？"
     main(topic)

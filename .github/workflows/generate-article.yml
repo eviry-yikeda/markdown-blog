@@ -6,7 +6,7 @@ on:
       topic:
         description: '記事のトピックを入力してください'
         required: true
-        default: 'Youtubeにおける美容トレンドはなんですか？'
+        default: 'YoutubeとTikTokでの美容トレンドはなんですか？'
 
   schedule:
     - cron:  "0 0 * * *"
