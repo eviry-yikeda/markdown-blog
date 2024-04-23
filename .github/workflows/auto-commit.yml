@@ -2,9 +2,14 @@ name: auto-commit
 
 on:
   workflow_dispatch:
+    inputs:
+      topic:
+        description: '記事のトピックを入力してください'
+        required: true
+        default: 'Youtubeにおける美容トレンドはなんですか？'
 
   schedule:
-    - cron:  "0 0 1 * *"
+    - cron:  "0 0 * * *"
 
 permissions:
   contents: write
@@ -53,7 +58,7 @@ jobs:
         #   env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          poetry run python main.py
+          poetry run python main.py ${{ github.event.inputs.topic }}
 
           # 生成したarticle_writer/articles内にあるmdファイル名を取得
           MD_FILE_NAME=$(ls articles)
