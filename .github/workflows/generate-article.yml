@@ -1,4 +1,4 @@
-name: auto-commit
+name: generate-article
 
 on:
   workflow_dispatch:
@@ -17,7 +17,7 @@ permissions:
 
 jobs:
 
-  auto-commit:
+  generate-article:
     # needs: check-branch
     runs-on: ubuntu-latest
 
