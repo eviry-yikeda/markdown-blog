@@ -1,4 +1,4 @@
-import os
+import sys
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -36,9 +36,7 @@ def export_article(topic: str, article: str) -> None:
         f.write(data)
 
 
-def main():
-    # TODO: 可変にする
-    topic = "YoutubeとTikTokでの美容トレンドはなんですか？"
+def main(topic: str):
     info = collect_info(topic, clear_thread=True)
     is_first_review = True
     print("--INFO--")
@@ -77,4 +75,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    args = sys.argv
+
+    topic = args[1] if len(args) > 1 else "Youtubeにおける美容トレンドはなんですか？"
+    main(topic)
